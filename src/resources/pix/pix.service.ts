@@ -60,7 +60,7 @@ export default class PixService {
         const pixTransaction = await pixRepository.findOne({where: {id: keyDecoded.registerId, status: 'open'}})
 
        if(!pixTransaction){
-        throw new AppError('Chave inválida par pagamento', 401)
+        throw new AppError('Chave inválida para pagamento', 401)
        }
 
        pixTransaction.status = 'close';
@@ -74,7 +74,6 @@ export default class PixService {
    async transactions(user: Partial<User>) {
     const pixRepository = getRepository(Pix); 
    
-
     const pixReceived = await (await pixRepository.find({where: {requestingUser: user.id, status: 'close'}, relations: ['payingUser']}))
 
     const pixPaying = await pixRepository.find({where: {payingUser: user.id, status: 'close'}, relations: ['requestingUser']})

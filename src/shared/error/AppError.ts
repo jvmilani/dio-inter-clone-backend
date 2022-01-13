@@ -8,6 +8,8 @@ class AppError {
         this.message = message;
         this.statusCode = statusCode;
         this.data = data;
+
+        return data;
     }
 }
 
